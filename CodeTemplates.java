@@ -1,3 +1,4 @@
+package DSAlgo;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,7 +19,7 @@ import java.util.LinkedList;
 //==============================================================================================================================
 //Template
 //==============================================================================================================================
-class CodeTemplates {
+public class CodeTemplates {
 
 //==============================================================================================================================
 //Constants
@@ -355,7 +356,7 @@ class CodeTemplates {
             }
             return result;
         }
-        
+
         public static <T extends Object> List<Set<T>> get(T[] arr) {
             long nSets = 0;
             int N = arr.length;
@@ -375,6 +376,38 @@ class CodeTemplates {
                 result.add(s);
             }
             return result;
+        }
+    }
+
+    public static class Point<E> {
+
+        private E x;
+        private E y;
+
+        public Point(E x, E y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        public E getX() {
+            return x;
+        }
+
+        public void setX(E x) {
+            this.x = x;
+        }
+
+        public E getY() {
+            return y;
+        }
+
+        public void setY(E y) {
+            this.y = y;
+        }
+
+        @Override
+        public String toString() {
+            return "(x : " + this.x + ", y : " + this.y + ")";
         }
     }
 
@@ -459,35 +492,4 @@ class CodeTemplates {
         }
     }
 
-    public static class Point<E> {
-
-        private E x;
-        private E y;
-
-        public Point(E x, E y) {
-            this.x = x;
-            this.y = y;
-        }
-
-        public E getX() {
-            return x;
-        }
-
-        public void setX(E x) {
-            this.x = x;
-        }
-
-        public E getY() {
-            return y;
-        }
-
-        public void setY(E y) {
-            this.y = y;
-        }
-
-        @Override
-        public String toString() {
-            return "(x : " + this.x + ", y : " + this.y + ")";
-        }
-    }
 }

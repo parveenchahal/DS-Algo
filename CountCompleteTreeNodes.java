@@ -14,7 +14,52 @@ package DSAlgo;
 
 import java.util.*;
 
-public class CountCompleteTreeNodes {
+class CountCompleteTreeNodes1 {
+
+    class TreeNode {
+
+        TreeNode left, right;
+    }
+
+    private int leftHeightOfTree(TreeNode root) {
+        int height = 0;
+        while (root != null) {
+            root = root.left;
+            height++;
+        }
+        return height;
+    }
+    
+    private int rightHeightOfTree(TreeNode root) {
+        int height = 0;
+        while (root != null) {
+            root = root.right;
+            height++;
+        }
+        return height;
+    }
+
+    private Stack<Integer> getPathOf(int num) {
+        Stack<Integer> st = new Stack<>();
+        while (num > 0) {
+            st.push(num);
+            num >>>= 1;
+        }
+        return st;
+    }
+
+    public int countNodes(TreeNode root) {
+        int leftHeight = leftHeightOfTree(root);
+        int rightHeight = rightHeightOfTree(root);
+        if (leftHeight == rightHeight) {
+            return (1 << leftHeight) - 1;
+        }
+        return 1 + countNodes(root.left) + countNodes(root.right);
+    }
+}
+
+
+class CountCompleteTreeNodes2 {
 
     class TreeNode {
 

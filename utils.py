@@ -1,8 +1,8 @@
 def parse_int_list(s: str, sep: str = ' ') -> list:
-    return [int(x) for x in s.split(sep)]
+    return map(int, s.split(sep))
 
 def parse_float_list(s: str, sep: str = ' ') -> list:
-    return [int(x) for x in s.split(sep)]
+    return map(float, s.split(sep))
 
 def print_matrix(mat):
     for r in mat:
@@ -31,5 +31,5 @@ def power_set(arr: list) -> list:
     n = len(arr)
     r = [set()]
     for i in range(1, n + 1): 
-        r.extend([set(x) for x in combinations(arr, i)])
+        r.extend(map(set, combinations(arr, i)))
     return r

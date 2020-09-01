@@ -1,20 +1,12 @@
 from disjoint_set import DisjointSet
+from graph import Edge
 
-class Edge():
-    u: int
-    v: int
-    w: int
-
-    def __init__(self, u, v, w):
-        self.u = u
-        self.v = v
-        self.w = w
-    
-    def __repr__(self):
-        return str(self.__dict__)
+#
+# https://www.hackerrank.com/challenges/kruskalmstrsub/problem
+#
 
 def kruskals(edges, total_nodes):
-    edges = sorted(edges, key=lambda x: x.w)
+    edges = sorted(edges, key=lambda x: x.wt)
 
     ds = DisjointSet()
     for i in range(1, total_nodes + 1):
@@ -23,7 +15,7 @@ def kruskals(edges, total_nodes):
     s = 0
     for edge in edges:
         if ds.find(edge.u) != ds.find(edge.v):
-            s += edge.w
+            s += edge.wt
             ds.union(edge.u, edge.v)
 
     return s

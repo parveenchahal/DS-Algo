@@ -2,15 +2,15 @@ def max_diff(A):
     m = -0xfffffffffffffffffffffffffff
     j = 0
     for i in range(1, len(A)):
-        xi = A[i] + i + 1 
-        xj = A[j] + j + 1
+        xi = A[i] + i
+        xj = A[j] + j
         m = max(m, xi - xj)
         if xi < xj:
             j = i
     j = 0
     for i in range(1, len(A)):
-        xi = i + 1 - A[i] 
-        xj = j + 1 - A[j]
+        xi = i - A[i] 
+        xj = j - A[j]
         m = max(m, xi - xj)
         if xi < xj:
             j = i

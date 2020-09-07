@@ -1,3 +1,14 @@
+def cmp_to_key(cmp):
+    '''Can be used as key for sorted function
+       This function also present in functools'''
+    class K:
+        def __init__(self, obj, *args):
+            self.obj = obj
+            
+        def __lt__(self, o):
+            return cmp(self.obj, o.obj) < 0
+    return K
+
 def parse_int_list(s: str, sep: str = ' ') -> list:
     return map(int, s.split(sep))
 

@@ -5,11 +5,17 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Current File",
-            "type": "python",
+            "type": "java",
+            "name": "Launch Current File",
             "request": "launch",
-            "program": "${file}",
-            "console": "integratedTerminal"
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch Test",
+            "request": "launch",
+            "mainClass": "Test",
+            "projectName": "DSAlgo_9afca4c0"
         }
     ]
 }

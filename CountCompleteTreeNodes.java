@@ -10,7 +10,6 @@
  * otherwise go to right in the tree
  *
  */
-package DSAlgo;
 
 import java.util.*;
 

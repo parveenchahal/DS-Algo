@@ -1,5 +1,3 @@
-package DSAlgo;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -102,6 +100,15 @@ public class CodeTemplates {
 
     public static void printArray(double[] arr) {
         System.out.print(Arrays.toString(arr));
+    }
+
+    public static void printMatrix(List<List<? extends Object>> matrix) {
+        for(List<? extends Object> list : matrix) {
+            for (Object x : list) {
+                System.out.print(x.toString() + "\t");
+            }
+            System.out.println();
+        }
     }
 
     public static void printMatrix(int[][] matrix) {

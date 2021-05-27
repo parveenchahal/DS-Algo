@@ -1,5 +1,5 @@
-from disjoint_set import DisjointSet
-from graph import Edge
+from utils import DisjointSet
+from utils import Edge
 
 #
 # https://www.hackerrank.com/challenges/kruskalmstrsub/problem

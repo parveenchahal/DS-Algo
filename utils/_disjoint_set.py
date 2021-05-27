@@ -7,7 +7,7 @@ class DisjointSet():
     def __init__(self):
         self._map = {}
 
-    def add_set(self, v: Union[Any, List]):
+    def add_set(self, v: Union[Any, List[Any]]):
         if isinstance(v, list):
             for x in v:
                 self._map[x] = v[0]

@@ -1,3 +1,7 @@
+from ._disjoint_set import DisjointSet
+from ._graph import Edge, Graph
+from ._heaps import BinaryHeap
+
 def cmp_to_key(cmp):
     '''Can be used as key for sorted function
        This function also present in functools'''

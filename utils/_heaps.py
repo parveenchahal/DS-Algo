@@ -1,4 +1,47 @@
-class BinaryHeap():
+class BinaryHeap:
+    _Node = None
+
+    def __init__(self, max_heap=False, key=None):
+        self._key = key
+        self._max_heap = max_heap
+        self._values = []
+        class temp:
+            def __init__(self, val, key, reverse) -> None:
+                self.reverse = reverse
+                self.val = val
+                self.key = key
+            def __lt__(self, other):
+                if not self.reverse:
+                    if self.key is not None:
+                        return self.key(self.val).__lt__(self.key(other.val))
+                    return self.val.__lt__(other.val)
+                if self.key is not None:
+                    return self.key(other.val).__lt__(self.key(self.val))
+                return other.val.__lt__(self.val)
+        self._Node = temp
+
+    def push(self, val):
+        from heapq import heappush
+        heappush(self._values, self._Node(val, self._key, self._max_heap))
+
+    def pop(self):
+        from heapq import heappop
+        return heappop(self._values).val
+
+    def __len__(self):
+        return len(self._values)
+
+
+
+
+
+
+
+
+
+
+
+class ____MyBinaryHeap():
     _values: list
     _size: int
 

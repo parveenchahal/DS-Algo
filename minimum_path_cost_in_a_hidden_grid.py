@@ -19,13 +19,11 @@ import heapq
 
 class Solution(object):
     
-    def _dijkstra(self, master, i, j):
+    def _dijkstra(self, i, j):
         heap = [[0, i, j]]
         while len(heap) > 0:
-            node = heapq.heappop(heap)
-            dist = node[0]
-            node_i = node[1]
-            node_j = node[2]
+            dist, node_i, node_j = heapq.heappop(heap)
+
             if self._visited[node_i][node_j]:
                 continue
             
@@ -37,9 +35,7 @@ class Solution(object):
             if self._links[node_i][node_j] is None:
                 continue
             for x in self._links[node_i][node_j]:
-                x_i = x[0]
-                x_j = x[1]
-                x_d = x[2]
+                x_i, x_j, x_d = x
                 if not self._visited[x_i][x_j]:
                     heapq.heappush(heap, [dist + x_d, x_i, x_j])
             
@@ -53,7 +49,7 @@ class Solution(object):
         self._populate_graph(master, START, START)
         if self._target is None:
             return -1
-        return self._dijkstra(master, START, START)
+        return self._dijkstra(START, START)
 
     
     def _populate_graph(self, master, i, j):

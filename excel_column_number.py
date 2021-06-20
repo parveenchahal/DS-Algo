@@ -2,8 +2,6 @@
 # https://www.interviewbit.com/problems/excel-column-title/
 
 class Solution:
-    # @param A : string
-    # @return an integer
     def titleToNumber(self, s):
         ABC = {chr(i): i - ord('A') + 1 for i in range(ord('A'), ord('A') + 26)}
         n = len(s)

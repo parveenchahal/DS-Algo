@@ -1,14 +1,17 @@
 # https://www.interviewbit.com/problems/excel-column-number/
 # https://www.interviewbit.com/problems/excel-column-title/
 
-def excel_column_number(s):
-    ABC = {chr(i): i - 64 for i in range(65, 65 + 26)}
-    n = len(s)
-    result = 0
-    for i in range(0, n):
-        result *= 26
-        result += ABC[s[i]]
-    return result
+class Solution:
+    # @param A : string
+    # @return an integer
+    def titleToNumber(self, s):
+        ABC = {chr(i): i - ord('A') + 1 for i in range(ord('A'), ord('A') + 26)}
+        n = len(s)
+        result = 0
+        for i in range(0, n):
+            result *= 26
+            result += ABC[s[i]]
+        return result
 
 def excel_column_string(n):
     ABC = {i: chr(64 + i) for i in range(1, 26)}

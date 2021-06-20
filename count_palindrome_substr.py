@@ -1,5 +1,31 @@
 # https://leetcode.com/problems/palindromic-substrings/
 
+# Solution 1
+class Solution:
+    def countSubstrings(self, s: str) -> int:
+        n = len(s)
+        
+        count = 0
+        for k in range(n):
+            i, j = k, k
+            while i >=0 and j < n:
+                if s[i] != s[j]:
+                    break
+                count += 1
+                i -= 1
+                j += 1
+                
+        for k in range(n - 1):
+            i, j = k, k + 1
+            while i >=0 and j < n:
+                if s[i] != s[j]:
+                    break
+                count += 1
+                i -= 1
+                j += 1
+        return count
+
+# Solution 2
 class Solution:
     def countSubstrings(self, s: str) -> int:
         n = len(s)

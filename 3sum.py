@@ -11,11 +11,10 @@ class Solution:
             i = k + 1
             j = n - 1
             while i < j:
+                
+                # have fixed two numbers to need to check for 3rd
                 if i > k + 1 and nums[i] == nums[i - 1]:
                     i += 1
-                    continue
-                if j < n - 1 and nums[j] == nums[j + 1]:
-                    j -= 1
                     continue
                 x = nums[i] + nums[j]
                 if x < -nums[k]:

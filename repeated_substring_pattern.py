@@ -1,7 +1,9 @@
 # https://leetcode.com/problems/repeated-substring-pattern/
 
 # Method 1
-
+class Solution:
+    def repeatedSubstringPattern(self, s: str) -> bool:
+        return s in (s[1:] + s[:-1])
 
 # Method 2 (Using LPS(KMP))
 class Solution:

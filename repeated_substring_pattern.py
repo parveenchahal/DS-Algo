@@ -29,3 +29,19 @@ class Solution:
             return False
         d = n - l
         return n % d == 0
+
+# Method 3
+class Solution:
+    def repeatedSubstringPattern(self, s: str) -> bool:
+        n = len(s)
+        tmp = ''
+        tl = 0
+        for i in range(n - 1):
+            tmp += s[i]
+            tl += 1
+            if n % tl != 0:
+                continue
+            x = n // tl
+            if (tmp * x) == s:
+                return True
+        return False

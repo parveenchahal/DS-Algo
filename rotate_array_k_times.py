@@ -8,11 +8,11 @@ class Solution:
             j -= 1
         
     def rotate(self, nums: List[int], k: int) -> None:
-        if k <= 0:
-            return
-        
         n = len(nums)
         k = k % n
+        
+        if k <= 0:
+            return
         
         self._reverse(nums, 0, n - 1)
         self._reverse(nums, 0, k - 1)

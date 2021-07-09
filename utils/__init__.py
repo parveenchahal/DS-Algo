@@ -2,6 +2,7 @@ from ._disjoint_set import DisjointSet
 from ._graph import Edge, Graph
 from ._heaps import BinaryHeap
 from ._square_root import square_root
+from ._pow import pow as my_pow
 
 MOD = int(f'1{("0" * 8)}7')
 
@@ -74,18 +75,3 @@ def radix_sort(nums):
                 c += 1
     for i in range(n):
         nums[i] = int(nums[i][::-1])
-
-def pow(x: float, n: int):
-    if n == 0:
-        return 1
-    if n == 1:
-        return x
-    if n == -1:
-        return 1 / x
-
-    if n & 1 == 1:
-        m = self.myPow(x, n // 2)
-        return x * m * m
-    else:
-        m = self.myPow(x, n // 2)
-        return m * m

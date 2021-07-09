@@ -51,3 +51,26 @@ def power_set(arr: list) -> list:
     for i in range(1, n + 1): 
         r.extend(map(set, combinations(arr, i)))
     return r
+
+def radix_sort(nums):
+    n = len(nums)
+    max_num = str(max(nums))
+    max_len = len(max_num)
+
+    for i in range(n):
+        nums[i] = str(nums[i])[::-1]
+        d = max_len - len(nums[i])
+        if d > 0:
+            nums[i] = nums[i] + ('0' * d)
+
+    for k in range(max_len):
+        bucket = [[] for _ in range(10)]
+        for i in range(n):
+            bucket[int(nums[i][k])].append(nums[i])
+        c = 0
+        for b in range(10):
+            for x in bucket[b]:
+                nums[c] = x
+                c += 1
+    for i in range(n):
+        nums[i] = int(nums[i][::-1])

@@ -80,16 +80,12 @@ def pow(x: float, n: int):
         return 1
     if n == 1:
         return x
-    if n == 2:
-        return x * x
     if n == -1:
         return 1 / x
-    if n == -2:
-        return (1 / x) * (1 / x)
-    
+
     if n & 1 == 1:
-        m = pow(x, n // 2)
+        m = self.myPow(x, n // 2)
         return x * m * m
     else:
-        m = pow(x, n // 2)
+        m = self.myPow(x, n // 2)
         return m * m

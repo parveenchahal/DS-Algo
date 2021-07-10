@@ -1,5 +1,29 @@
 # https://leetcode.com/problems/3sum/
 
+# Method 1 (Without sorting)
+class Solution:
+    def twoSum(self, nums, i, j, target) -> List[int]:
+        s = set()
+        res = []
+        for k in range(i, j + 1):
+            x = target - nums[k]
+            if x in s:
+                res.append([x, nums[k]])
+            s.add(nums[k])
+        return res
+    
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        n = len(nums)
+        result = set()
+        for k in range(n - 2):
+            t = self.twoSum(nums, k + 1, n - 1, -nums[k])
+            for x in t:
+                x.append(nums[k])
+                x.sort()
+                result.add(tuple(x))
+        return result
+
+# Method 2 (Sorting)
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
         n = len(nums)

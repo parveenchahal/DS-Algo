@@ -2,6 +2,28 @@
 
 from typing import List
 
+# Method 1
+class Solution:
+    def minSubarray(self, nums: List[int], p: int) -> int:
+        n = len(nums)
+        r = sum(nums) % p
+        if r == 0:
+            return 0
+        sum_so_far = 0
+        m = {0: -1}
+        MAX = n
+        res = MAX
+        for i, x in enumerate(nums):
+            sum_so_far += x
+            sum_so_far = sum_so_far % p
+            m[sum_so_far] = i
+            t = (sum_so_far - r) % p
+            if t in m:
+                res = min(res, i - m[t])
+        return res if res < n else -1
+
+
+# Method 2
 def min_subarray(nums: List[int], p: int) -> int:
     n = len(nums)
     s = sum(nums)

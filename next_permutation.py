@@ -1,42 +1,31 @@
-# https://www.interviewbit.com/problems/next-permutation/
+# https://leetcode.com/problems/next-permutation/
 
-def swap(arr, i, j):
-    t = arr[i]
-    arr[i] = arr[j]
-    arr[j] = t
-
-def reverse(arr, i, j):
-    while(i < j):
-        swap(arr, i, j)
-        i += 1
-        j -= 1
-
-def next_permutation(arr):
-    n = len(arr)
-    if n < 2:
-        return arr
-    prev = arr[n - 1]
-    for i in range(n - 2, -1, -1):
-        if arr[i] < prev:
-            j = n - 1
-            while(j > i):
-                if arr[j] > arr[i]:
-                    break
-                j -= 1
-            swap(arr, i, j)
-            reverse(arr, i + 1, n - 1)
-            return arr
-        prev = arr[i]
-    return list(reversed(arr))
-
-r = next_permutation([1, 2, 3, 1])
-assert r == [1, 3, 1, 2]
-
-r = next_permutation([1])
-assert r == [1]
-
-r = next_permutation([1, 2, 3])
-assert r == [1, 3, 2]
-
-r = next_permutation([3, 2, 1])
-assert r == [1, 2, 3]
+class Solution:
+    def _find_drop_from_right(self, nums):
+        for i in range(len(nums) - 2, -1, -1):
+            if nums[i] < nums[i + 1]:
+                return i
+        return -1
+    
+    def _reverse(self, nums, i, j):
+        while i < j:
+            nums[i], nums[j] = nums[j], nums[i]
+            i += 1
+            j -= 1
+            
+    def _find_just_greater_num_index(self, nums, x):
+        for i in range(len(nums) - 1, -1, -1):
+            if nums[i] > x:
+                return i
+        
+    def nextPermutation(self, nums: List[int]) -> None:
+        n = len(nums)
+        if n <= 0:
+            return
+        drop_index = self._find_drop_from_right(nums)
+        if drop_index < 0:
+            self._reverse(nums, 0, n - 1)
+            return
+        just_greater_index = self._find_just_greater_num_index(nums, nums[drop_index])
+        nums[just_greater_index], nums[drop_index] = nums[drop_index], nums[just_greater_index]
+        self._reverse(nums, drop_index + 1, n - 1)

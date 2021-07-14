@@ -5,6 +5,7 @@ class Solution:
     def multiply(self, num1: str, num2: str) -> str:
         return str(int(num1) * int(num2))
 
+
 # Method 2
 class Solution:
     def _sum(self, num1, num2):

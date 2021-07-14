@@ -1,11 +1,13 @@
 # https://leetcode.com/problems/string-to-integer-atoi/
 
-MIN = -0x80000000
-MAX = 0x7fffffff
 class Solution:
     def _atoi(self, s):
         if len(s) <= 0:
             return 0
+        
+        MIN = -0x80000000
+        MAX = 0x7fffffff
+        
         neg = False
         if s[0] == '-':
             neg = True
@@ -30,7 +32,6 @@ class Solution:
         if n <= 0:
             return 0
         
-        # Deterministic Finite Automata (DFA) 
         dfa = {
             0: {' ': 0, 's': 1, 'd': 2},
             1: {'d': 2},
@@ -54,5 +55,6 @@ class Solution:
                     break
             except KeyError:
                 break
+        if current_state != 2:
+            return 0
         return self._atoi(final_str)
-                

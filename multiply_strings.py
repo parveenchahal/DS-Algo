@@ -31,6 +31,8 @@ class Solution:
         return res
     
     def multiply(self, num1: str, num2: str) -> str:
+        if num1 == '0' or num2 == '0':
+            return '0'
         num1 = list(map(int, reversed(num1)))
         num2 = list(map(int, reversed(num2)))
         if len(num1) > len(num2):
@@ -51,5 +53,4 @@ class Solution:
                 else:
                     t.append(m)
             res = self._sum(res, t)
-        res = ''.join(map(str, reversed(res))).lstrip('0')
-        return res if len(res) > 0 else '0'
+        return ''.join(map(str, reversed(res)))

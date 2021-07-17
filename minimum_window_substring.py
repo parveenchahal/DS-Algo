@@ -14,7 +14,7 @@ class Solution:
         
         j = 0
         i = 0
-        MAX = 'Random' * (n + 1)
+        MAX = '#' * (n + 1)
         res = MAX
         tc = len(t)
         while i < n:

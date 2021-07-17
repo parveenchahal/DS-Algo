@@ -10,12 +10,8 @@ class Solution:
         if n < len(t):
             return ''
         
-        for x in t:
-            try:
-                m[x] += 1
-            except KeyError:
-                m[x] = 1
-                
+        m = collections.Counter(t)
+        
         j = 0
         i = 0
         MAX = 'Random' * (n + 1)
@@ -24,22 +20,25 @@ class Solution:
         while i < n:
             try:
                 m[s[i]] -= 1
-                if m[s[i]] >= 0: tc -= 1
-            except:
+                if m[s[i]] >= 0:
+                    tc -= 1
+            except KeyError:
                 pass
+            
             i += 1
             if tc > 0:
                 continue
                 
             while j < i:
                 try:
-                    if m[s[j]] < 0:
-                        m[s[j]] += 1
-                        j += 1
-                    else:
+                    if m[s[j]] >= 0:
                         break
-                except:
-                    j += 1
+                    m[s[j]] += 1
+                except KeyError:
+                    pass
+                j += 1
+            
             if i - j < len(res):
                 res = s[j:i]
+            
         return res if res != MAX else ''

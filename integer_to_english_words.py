@@ -1,11 +1,8 @@
-# https://leetcode.com/problems/integer-to-english-words/
-
 class Solution:
         
     def _numberToWords(self, num: int) -> str:
         if num <= 0:
             return []
-        
         n_to_s = {
             1: 'One',
             2: 'Two',
@@ -33,7 +30,11 @@ class Solution:
             60: 'Sixty',
             70: 'Seventy',
             80: 'Eighty',
-            90: 'Ninety'
+            90: 'Ninety',
+            100: 'Hundred',
+            1000: 'Thousand',
+            1000000: 'Million',
+            1000000000: 'Billion'
         }
         
         if num >= 1 and num <= 9:
@@ -54,25 +55,25 @@ class Solution:
         n = num // billion
         if n > 0:
             res.extend(self._numberToWords(n))
-            res.append('Billion')
+            res.append(n_to_s[billion])
             num -= billion * n
         
         n = num // million
         if n > 0:
             res.extend(self._numberToWords(n))
-            res.append('Million')
+            res.append(n_to_s[million])
             num -= million * n
             
         n = num // thousand
         if n > 0:
             res.extend(self._numberToWords(n))
-            res.append('Thousand')
+            res.append(n_to_s[thousand])
             num -= thousand * n
             
         n = num // hundred
         if n > 0:
             res.extend(self._numberToWords(n))
-            res.append('Hundred')
+            res.append(n_to_s[hundred])
             num -= hundred * n
         
         if num >= 20 and num <= 99:

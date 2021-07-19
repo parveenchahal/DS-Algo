@@ -11,16 +11,17 @@ class Solution:
         def _flatten(root):
             if root is None:
                 return
+            
             l = root.left
             r = root.right
-            root.left = None
-            root.right = l
+            
             _flatten(l)
             if l != None:
+                root.left = None
+                root.right = l
                 while l.right != None:
                     l = l.right
                 l.right = r
-            else:
-                root.right = r
+            
             _flatten(r)
         _flatten(root)

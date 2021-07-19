@@ -8,7 +8,9 @@ class Solution:
         if grid[i][j] == '0':
             return
         
+        # Instead of visited set, changing grid itself
         grid[i][j] = '0'
+        
         self._dfs(grid, i + 1, j, n, m)
         self._dfs(grid, i - 1, j, n, m)
         self._dfs(grid, i, j + 1, n, m)

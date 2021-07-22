@@ -1,5 +1,6 @@
 # https://leetcode.com/problems/stickers-to-spell-word/
 
+
 class Solution:
     
     def _get_remaining(self, curr, x):
@@ -11,23 +12,13 @@ class Solution:
             i = ord(c) - ord('a')
             if count[i] > 0:
                 count[i] -= 1
-        res = []
+        res = ''
         for i in range(26):
             if count[i] > 0:
-                res.append(chr(ord('a') + i) * count[i])
-        return ''.join(res)
+                res += (chr(ord('a') + i) * count[i])
+        return res
     
     def minStickers(self, stickers: List[str], target: str) -> int:
-        target_set = set(list(target))
-        graph = {}
-        for s in stickers:
-            for x in set(s):
-                if x in target_set:
-                    try:
-                        graph[x].append(s)
-                    except KeyError:
-                        graph[x] = [s]
-        
         q = deque()
         visited = set()
         

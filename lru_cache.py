@@ -33,7 +33,6 @@ class LRUCache:
     def _delete(self, node):
         pre = node.left
         nex = node.right
-        node.left = node.right = None
         
         if pre is None and nex is None:
             self._head = self._end = None
@@ -64,16 +63,13 @@ class LRUCache:
         return node.val
     
     def _delete_last(self):
-        #print('_delete_last')
         node = self._end
         del self._map[node.key]
         self._delete(node)
 
     def put(self, key: int, value: int) -> None:
-        #print('put')
         node = None
         if key in self._map:
-            #print('already exists')
             node = self._map[key]
             node.val = value
             self._delete(node)

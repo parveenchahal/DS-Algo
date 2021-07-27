@@ -22,3 +22,28 @@ class Solution:
             q_sum += quality[index]
             q_sum += heapq.heappop(h)
         return res
+
+
+# Optimized memory
+class Solution:
+    def mincostToHireWorkers(self, quality: List[int], wage: List[int], k: int) -> float:
+        n = len(quality)
+        sorted_ratio_indices = list(range(n))
+        sorted_ratio_indices.sort(key=lambda i: wage[i] / quality[i])
+
+        MAX = 0x7fffffffffffffffffff
+        res = MAX
+
+        h = [-quality[sorted_ratio_indices[i]] for i in range(k - 1)]
+        heapq.heapify(h)
+
+        quality_sum = -sum(h)
+        
+        for i in range(k - 1, n):
+            index = sorted_ratio_indices[i]
+            ratio = wage[index] / quality[index]
+            quality_sum += quality[index]
+            res = min(res, quality_sum * ratio)
+            heapq.heappush(h, -quality[index])
+            quality_sum += heapq.heappop(h)
+        return res

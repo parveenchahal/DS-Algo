@@ -6,6 +6,9 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+
+# Using min/max range
 class Solution:
     def bstFromPreorder(self, preorder: List[int]) -> Optional[TreeNode]:
         def helper(root, mi, ma, q):
@@ -24,3 +27,22 @@ class Solution:
         root = TreeNode(q.popleft())
         helper(root, -0x7fffffffff, 0x7fffffffff, q)
         return root
+
+# Using stack
+class Solution:
+    def bstFromPreorder(self, preorder: List[int]) -> Optional[TreeNode]:
+        root = TreeNode(preorder[0])
+        st = [root]
+        for i in range(1, len(preorder)):
+            node = st[-1]
+            child = TreeNode(preorder[i])
+            while len(st) > 0 and st[-1].val < child.val:
+                node = st.pop()
+            if child.val < node.val:
+                node.left = child    
+            else:
+                node.right = child
+            st.append(child)
+        
+        return root
+        

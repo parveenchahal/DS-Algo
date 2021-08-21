@@ -1,5 +1,6 @@
 # https://leetcode.com/problems/longest-valid-parentheses/
 
+# Using extra memory(stack)
 class Solution:
     def longestValidParentheses(self, s: str) -> int:
         n = len(s)
@@ -17,3 +18,4 @@ class Solution:
                     st = [i]
         res = max(res, n - 1 - st[-1])
         return res
+

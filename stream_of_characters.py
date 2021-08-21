@@ -13,25 +13,21 @@ class StreamChecker:
         self.trie = Node(False)
         for w in words:
             t = self.trie
-            for c in w:
+            for c in w[::-1]:
                 if c not in t.children:
                     t.children[c] = Node(False)
                 t = t.children[c]
             t.is_word = True
-        #print(self.trie)
-        self.list = []
+        self.stream = deque()
 
     def query(self, letter: str) -> bool:
-        found = False
-        nl = []
-        self.list.append(self.trie)
-        for l in self.list:
+        self.stream.appendleft(letter)
+        t = self.trie
+        for c in self.stream:
             try:
-                x = l.children[letter]
-                nl.append(x)
-                if x.is_word:
-                    found = True
+                t = t.children[c]
+                if t.is_word:
+                    return True
             except KeyError:
-                pass
-        self.list = nl
-        return found
+                return False
+        return False

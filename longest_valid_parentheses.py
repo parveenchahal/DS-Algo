@@ -19,3 +19,33 @@ class Solution:
         res = max(res, n - 1 - st[-1])
         return res
 
+    
+# Without extra memory; space: O(1)
+class Solution:
+    def longestValidParentheses(self, s: str) -> int:
+        n = len(s)
+        res = 0
+        left = right = 0
+        for i in range(n):
+            c = s[i]
+            if c == '(':
+                left += 1
+            else:
+                right += 1
+            if right > left:
+                left = right = 0
+            elif left == right:
+                res = max(res, left + right)
+        
+        left = right = 0
+        for i in range(n - 1, -1, -1):
+            c = s[i]
+            if c == '(':
+                left += 1
+            else:
+                right += 1
+            if left > right:
+                left = right = 0
+            elif left == right:
+                res = max(res, left + right)
+        return res

@@ -1,6 +1,5 @@
 # https://leetcode.com/problems/stream-of-characters/
 
-
 class Node:
     def __init__(self, is_word):
         self.children = {}

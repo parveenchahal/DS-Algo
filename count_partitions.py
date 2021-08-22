@@ -1,5 +1,5 @@
 #
-# https://www.interviewbit.com/problems/partitions
+# https://leetcode.com/problems/partition-array-into-three-parts-with-equal-sum/
 #
 
 

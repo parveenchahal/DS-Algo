@@ -1,25 +1,22 @@
 class Solution:
     def countSmaller(self, nums: List[int]) -> List[int]:
         n = len(nums)
-        nums = [[nums[i], 0, i] for i in range(n)]
-        self._invertion_count(0, n - 1, nums)
-        res = [None] * n
-        for x in nums:
-            _, c, i = x
-            res[i] = c
+        nums = [[nums[i], i] for i in range(n)]
+        res = [0] * n
+        self._invertion_count(0, n - 1, nums, res)
         return res
     
     
-    def _invertion_count(self, left, right, nums):
+    def _invertion_count(self, left, right, nums, res):
         if left >= right:
             return
         mid = left + (right - left) // 2
-        self._invertion_count(left, mid, nums)
-        self._invertion_count(mid + 1, right, nums)
-        self._merge(left, mid, right, nums)
+        self._invertion_count(left, mid, nums, res)
+        self._invertion_count(mid + 1, right, nums, res)
+        self._merge(left, mid, right, nums, res)
     
     
-    def _merge(self, left, mid, right, nums):
+    def _merge(self, left, mid, right, nums, res):
         i = left
         n1 = mid
         j = mid + 1
@@ -29,7 +26,7 @@ class Solution:
         
         while i <= n1 and j <= n2:
             if nums[i][0] <= nums[j][0]:
-                nums[i][1] += j - mid - 1
+                res[nums[i][1]] += j - mid - 1
                 temp[k] = nums[i]
                 k += 1
                 i += 1
@@ -40,7 +37,7 @@ class Solution:
         
         while i <= n1:
             temp[k] = nums[i]
-            nums[i][1] += j - mid - 1
+            res[nums[i][1]] += j - mid - 1
             k += 1
             i += 1
         

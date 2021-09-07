@@ -1,5 +1,6 @@
 # https://leetcode.com/problems/wildcard-matching/
 
+# Method 1 using DP
 class Solution:
     def isMatch(self, s: str, p: str) -> bool:
         ns = len(s)

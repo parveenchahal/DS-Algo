@@ -9,36 +9,41 @@ class Node:
         self.right = right
 """
 class Solution:
+    def _tree_to_doubly_list(self, root):
+        if root is None:
+            return
+        self._tree_to_doubly_list(root.left)
+        self._tree_to_doubly_list(root.right)
+        
+        l = root.left
+        r = root.right
+        
+        if l is not None:
+            while l.right:
+                l = l.right
+            root.left = l
+            l.right = root
+        
+        if r is not None:
+            while r.left:
+                r = r.left
+            r.left = root
+            root.right = r
+    
     def treeToDoublyList(self, root: 'Node') -> 'Node':
         if root is None:
             return
-        def _tree_to_doubly_list(root):
-            if root == None:
-                return
-            l = root.left
-            r = root.right
-            _tree_to_doubly_list(l)
-            _tree_to_doubly_list(r)
-            if l is not None:
-                while l.right != None:
-                    l = l.right
-                root.left = l
-                l.right = root
-            if r is not None:
-                while r.left != None:
-                    r = r.left
-                root.right = r
-                r.left = root
         
-        _tree_to_doubly_list(root)
-        while root.left != None:
+        self._tree_to_doubly_list(root)
+        
+        while root.left:
             root = root.left
+        last = root
         
-        ptr = root
-        while ptr.right != None:
-            ptr = ptr.right
+        while last.right:
+            last = last.right
         
-        ptr.right = root
-        root.left = ptr
+        last.right = root
+        root.left = last
         
         return root

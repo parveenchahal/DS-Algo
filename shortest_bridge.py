@@ -16,8 +16,10 @@ class Solution:
             Solution._dfs(grid, (vi, vj), R, C, name)
                 
     def _bfs(grid, u, name1, name2, R, C):
-        h = [(0, u[0], u[1])]
         visited = [[False] * C for _ in range(R)]
+        
+        h = [(0, u[0], u[1])]
+        visited[u[0]][u[1]] = True
         while len(h) > 0:
             ud, ui, uj = heapq.heappop(h)
             for dir in Solution.dirs:
@@ -25,11 +27,11 @@ class Solution:
                 if vi < 0 or vi >= R or vj < 0 or vj >= C or visited[vi][vj]:
                     continue
                 visited[vi][vj] = True
-                vd = ud
                 if grid[vi][vj] == name2:
-                    return vd
+                    return ud
+                vd = 0
                 if grid[vi][vj] != name1:
-                    vd += 1
+                    vd = ud + 1
                 heapq.heappush(h, (vd, vi, vj))
         return -1
         

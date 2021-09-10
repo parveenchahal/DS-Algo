@@ -36,12 +36,13 @@ class Solution:
     def shortestBridge(self, grid: List[List[int]]) -> int:
         R = len(grid)
         C = len(grid[0])
-        islands = []
-        name = 2
+        island2 = None
         for i in range(R):
             for j in range(C):
                 if grid[i][j] == 1:
-                    Solution._dfs(grid, (i, j), R, C, name)
-                    islands.append((i, j))
-                    name += 1
-        return Solution._bfs(grid, islands[0], 2, 3, R, C)
+                    Solution._dfs(grid, (i, j), R, C, 2)
+                    island2 = (i, j)
+                    break
+            if island2:
+                break
+        return Solution._bfs(grid, island2, 2, 1, R, C)

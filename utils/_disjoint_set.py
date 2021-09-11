@@ -28,9 +28,7 @@ class DisjointSet():
             del self._rank[a]
 
     def find(self, x):
-        try:
-            self._map[x]
-        except KeyError:
+        if x not in self._map:
             return None
         p = x
         while self._map[p] != p:

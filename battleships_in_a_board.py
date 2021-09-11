@@ -1,6 +1,5 @@
 # https://leetcode.com/problems/battleships-in-a-board/
 
-
 class Solution:    
     def countBattleships(self, board: List[List[str]]) -> int:
         R = len(board)
@@ -13,9 +12,7 @@ class Solution:
                 if i == 0 and j == 0 and board[i][j] == 'X':
                     count += 1
                     continue
-                elif i > 0 and board[i - 1][j] == 'X':
-                    continue
-                elif j > 0 and board[i][j - 1] == 'X':
+                elif i > 0 and board[i - 1][j] == 'X' or j > 0 and board[i][j - 1] == 'X':
                     continue
                 count += 1
         return count

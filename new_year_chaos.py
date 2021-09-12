@@ -1,3 +1,17 @@
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+#
+# Complete the 'minimumBribes' function below.
+#
+# The function accepts INTEGER_ARRAY q as parameter.
+#
+
 def merge(arr, l, mid, r):
     i = l
     j = mid + 1
@@ -30,7 +44,7 @@ def merge_sort(arr, l, r):
         inv += merge(arr, l, mid, r)
     return inv
 
-def minimum_bribes(q):
+def minimumBribes(q):
     n = len(q)
     for i in range(n):
         x = q[i] - i - 1
@@ -39,11 +53,13 @@ def minimum_bribes(q):
     inv = merge_sort(q, 0, n - 1)
     return inv
 
-minimum_bribes()
+if __name__ == '__main__':
+    t = int(input().strip())
 
-# t = int(input())
-# for _ in range(t):
-#     n = int(input())
-#     q = list(map(int, input().rstrip().split()))
-#     r = minimum_bribes(q)
-#     print(r)
+    for t_itr in range(t):
+        n = int(input().strip())
+
+        q = list(map(int, input().rstrip().split()))
+
+        r = minimumBribes(q)
+        print(r)

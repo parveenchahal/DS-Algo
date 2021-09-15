@@ -17,17 +17,21 @@ def cmp_to_key(cmp):
             return cmp(self.obj, o.obj) < 0
     return K
 
+
 def parse_int_list(s: str, sep: str = ' ') -> list:
     return map(int, s.split(sep))
 
+
 def parse_float_list(s: str, sep: str = ' ') -> list:
     return map(float, s.split(sep))
+
 
 def print_matrix(mat):
     for r in mat:
         for x in r:
             print(f'{x}\t', end='')
         print()
+
 
 def combinations(arr: list, r: int) -> list:
     from copy import deepcopy
@@ -52,6 +56,7 @@ def power_set(arr: list) -> list:
     for i in range(1, n + 1): 
         r.extend(map(set, combinations(arr, i)))
     return r
+
 
 def radix_sort(nums):
     n = len(nums)

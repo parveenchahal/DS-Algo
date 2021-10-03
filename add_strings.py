@@ -1,5 +1,24 @@
 # https://leetcode.com/problems/add-strings/
 
+# Method 1
+class Solution:
+    def addStrings(self, num1: str, num2: str) -> str:
+        i1 = len(num1) - 1
+        i2 = len(num2) - 1
+        carry = 0
+        res = []
+        while i1 >= 0 or i2 >= 0 or carry > 0:
+            x1 = ord(num1[i1]) - ord('0') if i1 >= 0 else 0
+            x2 = ord(num2[i2]) - ord('0') if i2 >= 0 else 0
+            s = x1 + x2 + carry
+            res.append(str(s % 10))
+            carry = s // 10
+            i1 -= 1
+            i2 -= 1
+        return ''.join(res[::-1])
+
+
+# Method 2
 class Solution:
     def addStrings(self, num1: str, num2: str) -> str:
         if num1 == '0':

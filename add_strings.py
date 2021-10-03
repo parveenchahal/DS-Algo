@@ -26,7 +26,9 @@ class Solution:
         if num2 == '0':
             return num1
         if len(num1) == 1 and len(num2) == 1:
-            return str(int(num1) + int(num2))
+            x1 = ord(num1) - ord('0')
+            x2 = ord(num2) - ord('0')
+            return str(x1 + x2)
         
         if len(num1) < len(num2):
             num1, num2 = num2, num1
@@ -46,7 +48,6 @@ class Solution:
             result[i] = self.addStrings(c, result[i])
             c = result[i][:-1] if len(result[i]) > 1 else '0'
             result[i] = result[i][-1]
-        
         s = ''.join(result)
         if c != '0':
             s = c + s

@@ -2,8 +2,33 @@
 
 # Method 1
 class Solution:
+    
+    def _adjust_carry(self, mul_res):
+        n = len(mul_res)
+        carry = 0
+        for i in range(n - 1, -1, -1):
+            s = mul_res[i] + carry
+            mul_res[i] = s % 10
+            carry = s // 10
+        if carry != 0:
+            return [carry] + mul_res
+        return mul_res
+    
     def multiply(self, num1: str, num2: str) -> str:
-        return str(int(num1) * int(num2))
+        if num1 == '0' or num2 == '0':
+            return '0'
+        num1 = list(map(int, num1))
+        num2 = list(map(int, num2))
+        if len(num1) > len(num2):
+            num2, num1 = num1, num2
+        n1 = len(num1)
+        n2 = len(num2)
+        mul_res = [0] * (n1 + n2 - 1)
+        for i,x in enumerate(num1):
+            for j,y in enumerate(num2):
+                mul_res[i + j] += x * y
+        res = self._adjust_carry(mul_res)
+        return ''.join(map(str, res))
 
 
 # Method 2

@@ -9,13 +9,15 @@
 class Solution:
     
     def _reverse(self, head, end):
-        pre = end
-        while head != end:
-            next = head.next
-            head.next = pre
-            pre = head
-            head = next
-        return pre
+        new_head = head
+        ptr = head.next
+        new_head.next = end
+        while ptr != end:
+            next = ptr.next
+            ptr.next = new_head
+            new_head = ptr
+            ptr = next
+        return new_head
     
     def _find_end_node(self, ptr, k):
         end = ptr

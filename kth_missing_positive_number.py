@@ -6,17 +6,16 @@ class Solution:
         n = len(arr)
         left = 0
         right = n - 1
-        ans = 0
+        ans = None
         while left <= right:
             mid = (left + right) >> 1
-            mis = arr[mid] - 1 - mid
-            if mis < k:
+            missing = arr[mid] - mid - 1
+            if missing < k:
                 ans = mid
                 left = mid + 1
             else:
                 right = mid - 1
-        
-        mis = arr[ans] - 1 - ans
-        if k <= mis:
+        if ans is None:
             return k
-        return arr[ans] + k - mis
+        missing = arr[ans] - ans - 1
+        return arr[ans] + k - missing

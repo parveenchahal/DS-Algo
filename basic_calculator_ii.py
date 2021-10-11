@@ -1,5 +1,7 @@
 # https://leetcode.com/problems/basic-calculator-ii/
 
+
+# Method 1 (Using Stack)
 class Solution:
     def calculate(self, s: str) -> int:
         s += '+'

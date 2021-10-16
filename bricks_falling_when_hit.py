@@ -30,7 +30,7 @@ class Solution:
             if grid[0][j] == 1:
                 ds.union(roof_node, (0, j))
         
-        for i in range(1, R):
+        for i in range(R):
             for j in range(C):
                 x = grid[i][j]
                 if x == 1:
@@ -39,6 +39,7 @@ class Solution:
                         if vi < 0 or vi >= R or vj < 0 or vj >= C or grid[vi][vj] == 0:
                             continue
                         ds.union((vi, vj), (i, j))
+        
         res = []
         for i in range(len(hits) - 1, -1, -1):
             hi, hj, x = hits[i]
@@ -59,6 +60,7 @@ class Solution:
                 if not self._is_stable(ds, roof_node, (vi, vj)) and ds.find(hit) != ds.find(v):
                     count += ds.size_of(v)
                 ds.union(hit, v)
+            
             if self._is_stable(ds, roof_node, hit):
                 res.append(count)
             else:

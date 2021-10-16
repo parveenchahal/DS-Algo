@@ -6,10 +6,18 @@ class DisjointSet():
     def __init__(self):
         self._map = {}
         self._rank = {}
+        self._size = {}
         
     def make_set(self, x):
         self._map[x] = x
         self._rank[x] = 0
+        self._size[x] = 1
+
+    def size_of(self, x):
+        p = self.find(x)
+        if p is not None:
+            return self._size[p]
+        return 0
 
     def union(self, x, y):
         a = self.find(x)
@@ -19,13 +27,19 @@ class DisjointSet():
         if self._rank[a] == self._rank[b]:
             self._map[b] = a
             self._rank[a] += 1
+            self._size[a] += self._size[b]
             del self._rank[b]
+            del self._size[b]
         elif self._rank[a] > self._rank[b]:
             self._map[b] = a
+            self._size[a] += self._size[b]
             del self._rank[b]
+            del self._size[b]
         else:
             self._map[a] = b
+            self._size[b] += self._size[a]
             del self._rank[a]
+            del self._size[a]
 
     def find(self, x):
         if x not in self._map:

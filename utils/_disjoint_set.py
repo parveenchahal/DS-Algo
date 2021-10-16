@@ -2,6 +2,7 @@ class DisjointSet():
 
     _map: dict
     _rank: dict
+    _size: dict
 
     def __init__(self):
         self._map = {}

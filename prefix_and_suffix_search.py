@@ -1,6 +1,7 @@
 # https://leetcode.com/problems/prefix-and-suffix-search/
 
 
+# Method 1:
 class Node:
     def __init__(self):
         self.word_index = 0
@@ -8,7 +9,43 @@ class Node:
         
     def __repr__(self):
         return f'({str(self.word_index)}, {str(self.children)})'
+
+class WordFilter:
+
+    def __init__(self, words: List[str]):
+        self._words = words
+        self._trie = Node()
+        for i,word in enumerate(words):
+            wl = len(word)
+            q = deque(list(word + '#' + word))
+            while q[0] != '#':
+                self._add(q, i)
+                q.popleft()
         
+    def _add(self, word, index):
+        trie = self._trie
+        for c in word:
+            trie = trie.children[c]
+            trie.word_index = index
+        
+    def f(self, prefix: str, suffix: str) -> int:
+        trie = self._trie
+        target = suffix + '#' + prefix
+        for c in target:
+            if c not in trie.children:
+                return -1
+            trie = trie.children[c]
+        return trie.word_index
+
+
+# Method 2:
+class Node:
+    def __init__(self):
+        self.word_index = 0
+        self.children = defaultdict(Node)
+        
+    def __repr__(self):
+        return f'({str(self.word_index)}, {str(self.children)})'
 
 class WordFilter:
 

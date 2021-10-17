@@ -1,7 +1,7 @@
 # https://leetcode.com/problems/prefix-and-suffix-search/
 
 
-# Method 1:
+# Method 1 (Trie of Suffix Wrapped Words):
 class Node:
     def __init__(self):
         self.word_index = 0
@@ -38,7 +38,7 @@ class WordFilter:
         return trie.word_index
 
 
-# Method 2:
+# Method 2 (Paired Trie - (prefix and suffix characters paired)):
 class Node:
     def __init__(self):
         self.word_index = 0

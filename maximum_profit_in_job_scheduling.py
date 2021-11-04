@@ -1,6 +1,36 @@
 # https://leetcode.com/problems/maximum-profit-in-job-scheduling/
 
 
+# Method 1 (Using Bottom-Up)
+class Solution:
+    
+    def _find_next(self, i, jobs):
+        _, cur_end, _ = jobs[i]
+        left = i + 1
+        right = len(jobs) - 1
+        res = len(jobs)
+        while left <= right:
+            mid = left + ((right - left) >> 1)
+            if cur_end <= jobs[mid][0]:
+                res = mid
+                right = mid - 1
+            else:
+                left = mid + 1
+        return res
+    
+    def jobScheduling(self, startTime: List[int], endTime: List[int], profit: List[int]) -> int:
+        n = len(startTime)
+        jobs = [(st, ed, p) for st,ed,p in zip(startTime, endTime, profit)]
+        jobs.sort()
+        memo = [x[2] for x in jobs]
+        for i in range(n - 2, -1, -1):
+            memo[i] = max(memo[i], memo[i + 1])
+            next = self._find_next(i, jobs)
+            if next < n:
+                memo[i] = max(memo[i], jobs[i][2] + memo[next])
+        return memo[0]
+
+
 # Method 2 (Using Top-To-Down)
 class Solution:
     

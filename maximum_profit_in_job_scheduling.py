@@ -1,6 +1,7 @@
 # https://leetcode.com/problems/maximum-profit-in-job-scheduling/
 
 
+# Method 2 (Using Top-To-Down)
 class Solution:
     
     def _find_next(self, i, jobs):

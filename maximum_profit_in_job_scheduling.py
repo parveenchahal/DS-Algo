@@ -5,11 +5,18 @@
 class Solution:
     
     def _find_next(self, i, jobs):
-        _, ed, _ = jobs[i]
-        i += 1
-        while i < len(jobs) and ed > jobs[i][0]:
-            i += 1
-        return i
+        _, cur_end, _ = jobs[i]
+        left = i + 1
+        right = len(jobs) - 1
+        res = len(jobs)
+        while left <= right:
+            mid = left + (right - left) // 2
+            if cur_end <= jobs[mid][0]:
+                res = mid
+                right = mid - 1
+            else:
+                left = mid + 1
+        return res
     
     def _jobScheduling(self, i, jobs, memo):
         if i >= len(jobs):

@@ -1,6 +1,7 @@
 # https://leetcode.com/problems/employee-free-time/
 
 
+# Method 1
 """
 # Definition for an Interval.
 class Interval:
@@ -8,7 +9,72 @@ class Interval:
         self.start = start
         self.end = end
 """
+class Solution:
+    
+    def _merge_two_sorted_lists(self, l1, l2):
+        n1 = len(l1)
+        n2 = len(l2)
+        i = 0
+        j = 0
+        res = []
+        while i < n1 and j < n2:
+            if l1[i].start <= l2[j].start:
+                res.append(l1[i])
+                i += 1
+            else:
+                res.append(l2[j])
+                j += 1
+        while i < n1:
+            res.append(l1[i])
+            i += 1
+        while j < n2:
+            res.append(l2[j])
+            j += 1
+        return res
+    
+    def _merge_k_sorted_lists(self, q):
+        q = deque(q)
+        if len(q) == 0:
+            raise ValueError('Empty Queue')
+        
+        while len(q) > 1:
+            a = q.popleft()
+            b = q.popleft()
+            c = self._merge_two_sorted_lists(a, b)
+            q.append(c)
+        
+        return q[0]
+        
+    def _merge_intervals(self, intervals):
+        n = len(intervals)
+        res = [intervals[0]]
+        for i in range(n):
+            interval = intervals[i]
+            st, ed = interval.start, interval.end
+            if st >= res[-1].start and st <= res[-1].end:
+                res[-1].end = max(res[-1].end, ed)
+            else:
+                res.append(interval)
+        return res
+    
+    def employeeFreeTime(self, schedule: '[[Interval]]') -> '[Interval]':
+        intervals = self._merge_k_sorted_lists(schedule)
+        merged_intervals = self._merge_intervals(intervals)
+        res = []
+        for i in range(1, len(merged_intervals)):
+            res.append(Interval(merged_intervals[i - 1].end, merged_intervals[i].start))
+        return res
 
+
+
+# Method 2
+"""
+# Definition for an Interval.
+class Interval:
+    def __init__(self, start: int = None, end: int = None):
+        self.start = start
+        self.end = end
+"""
 class Solution:
     
     def _merge_two_sorted_lists(self, l1, l2):

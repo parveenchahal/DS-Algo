@@ -15,14 +15,13 @@ class Solution:
     
     def _solve_sudoku(self, pos, board, rows, cols, boxes):
         i, j = pos
-        if i >= 9 or self.found:
-            self.found = True
-            return
+        if i >= 9:
+            return True
         if board[i][j] != '.':
             next_pos = self._next_pos(pos)
-            if not self.found:
-                self._solve_sudoku(next_pos, board, rows, cols, boxes)
+            return self._solve_sudoku(next_pos, board, rows, cols, boxes)
         else:
+            found = False
             for c in range(1, 10):
                 c = str(c)
                 if self._is_valid_placement(pos, rows, cols, boxes, c):
@@ -31,18 +30,18 @@ class Solution:
                     cols[j].add(c)
                     boxes[i // 3][j // 3].add(c)
                     next_pos = self._next_pos(pos)
-                    self._solve_sudoku(next_pos, board, rows, cols, boxes)
-                    if not self.found:
+                    found = found or self._solve_sudoku(next_pos, board, rows, cols, boxes)
+                    if not found:
                         rows[i].discard(c)
                         cols[j].discard(c)
                         boxes[i // 3][j // 3].discard(c)
                         board[i][j] = '.'
+            return found
     
     def solveSudoku(self, board: List[List[str]]) -> None:
         """
         Do not return anything, modify board in-place instead.
         """
-        self.found = False
         rows = [set() for _ in range(9)]
         cols = [set() for _ in range(9)]
         boxes = [[set() for _ in range(3)] for _ in range(3)]

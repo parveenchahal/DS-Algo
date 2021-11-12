@@ -15,7 +15,7 @@ class Solution:
     
     def _solve_sudoku(self, pos, board, rows, cols, boxes):
         i, j = pos
-        if i >= 9:
+        if i >= 9 or self.found:
             self.found = True
             return
         if board[i][j] != '.':
@@ -31,8 +31,7 @@ class Solution:
                     cols[j].add(c)
                     boxes[i // 3][j // 3].add(c)
                     next_pos = self._next_pos(pos)
-                    if not self.found:
-                        self._solve_sudoku(next_pos, board, rows, cols, boxes)
+                    self._solve_sudoku(next_pos, board, rows, cols, boxes)
                     if not self.found:
                         rows[i].discard(c)
                         cols[j].discard(c)

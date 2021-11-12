@@ -21,8 +21,7 @@ class Solution:
         for u,v in edges:
             for common_conn in g[u].intersection(g[v]):
                 trio_degree = degree[u] + degree[v] + degree[common_conn] - 6
-                if trio_degree >= 0:
-                    res = min(res, trio_degree)
+                res = min(res, trio_degree)
                 # Discard u and v from common_conn
                 # That has been considered already.
                 g[common_conn].discard(u)

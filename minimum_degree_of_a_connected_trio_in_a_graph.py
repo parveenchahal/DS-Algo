@@ -11,6 +11,9 @@ class Solution:
             u, v = edge
             g[u].add(v)
             g[v].add(u)
+        
+        # Need to store degree separatly
+        # because we'll be keep on dicarding sets
         degree = {}
         for x in g:
             degree[x] = len(g[x])
@@ -20,6 +23,8 @@ class Solution:
                 trio_degree = degree[u] + degree[v] + degree[common_conn] - 6
                 if trio_degree >= 0:
                     res = min(res, trio_degree)
+                # Discard u and v from common_conn
+                # That has been considered already.
                 g[common_conn].discard(u)
                 g[common_conn].discard(v)
         return res if res != self.MAX else -1

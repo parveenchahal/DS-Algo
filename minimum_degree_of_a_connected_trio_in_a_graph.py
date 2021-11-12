@@ -15,16 +15,15 @@ class Solution:
         for x in g:
             degree[x] = len(g[x])
         res = self.MAX
-        for u in range(1, n + 1):
-            for v in g[u]:
-                intersections = g[u].intersection(g[v])
-                for common_conn in intersections:
-                    trio_degree = degree[u] + degree[v] + degree[common_conn] - 6
-                    if trio_degree >= 0:
-                        res = min(res, trio_degree)
-                    g[common_conn].discard(u)
-                    g[common_conn].discard(v)
+        for u,v in edges:
+            for common_conn in g[u].intersection(g[v]):
+                trio_degree = degree[u] + degree[v] + degree[common_conn] - 6
+                if trio_degree >= 0:
+                    res = min(res, trio_degree)
+                g[common_conn].discard(u)
+                g[common_conn].discard(v)
         return res if res != self.MAX else -1
+
 
 
 # Method 2

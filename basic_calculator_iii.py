@@ -3,13 +3,15 @@
 
 class Solution:
     
+    PRECEDENCE = {
+        '+': 0,
+        '-': 0,
+        '*': 1,
+        '/': 1
+    }
+    
     def _infix_to_postfix(self, s):
-        prec = {
-            '+': 0,
-            '-': 0,
-            '*': 1,
-            '/': 1
-        }
+        s = f'({s})'
         postfix = []
         st = []
         cur_num = ''
@@ -21,7 +23,7 @@ class Solution:
                 postfix.append(int(cur_num))
             
             if c in ('+', '-', '*', '/'):
-                while len(st) > 0 and st[-1] != '(' and prec[st[-1]] >= prec[c]:
+                while len(st) > 0 and st[-1] != '(' and self.PRECEDENCE[st[-1]] >= self.PRECEDENCE[c]:
                     postfix.append(st.pop())
                 st.append(c)
             elif c == '(':
@@ -31,11 +33,6 @@ class Solution:
                     postfix.append(st.pop())
                 st.pop()
             cur_num = ''
-        if cur_num != '':
-            postfix.append(int(cur_num))
-        while len(st) > 0:
-            if st[-1] != '(':
-                postfix.append(st.pop())
         return postfix
     
     def _op(self, a, b, op):

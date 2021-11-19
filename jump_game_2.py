@@ -5,15 +5,17 @@
 class Solution:
     def jump(self, nums: List[int]) -> int:
         n = len(nums)
-        res = 0
+        steps = 0
         max_reach = 0
-        cur_jump = 0
-        for i in range(n - 1):
-            max_reach = max(max_reach, nums[i] + i)
-            if i == cur_jump:
-                res += 1
-                cur_jump = max_reach
-        return res
+        cur_reach = 0
+        for i,num in enumerate(nums):
+            if cur_reach >= n - 1:
+                return steps
+            max_reach = max(max_reach, num + i)
+            if cur_reach == i:
+                steps += 1
+                cur_reach = max_reach
+        return steps
 
 
 # Method 2 (Using extra space)

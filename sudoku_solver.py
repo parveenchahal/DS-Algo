@@ -31,11 +31,13 @@ class Solution:
                     boxes[i // 3][j // 3].add(c)
                     next_pos = self._next_pos(pos)
                     found = found or self._solve_sudoku(next_pos, board, rows, cols, boxes)
-                    if not found:
-                        rows[i].discard(c)
-                        cols[j].discard(c)
-                        boxes[i // 3][j // 3].discard(c)
-                        board[i][j] = '.'
+                    if found:
+                        return found
+                    
+                    rows[i].discard(c)
+                    cols[j].discard(c)
+                    boxes[i // 3][j // 3].discard(c)
+                    board[i][j] = '.'
             return found
     
     def solveSudoku(self, board: List[List[str]]) -> None:

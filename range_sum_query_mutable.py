@@ -91,7 +91,7 @@ class SegmentTree:
         else:
             r1 = self._query(2 * tree_index + 1, i, mid, left, mid)
             r2 = self._query(2 * tree_index + 2, mid + 1, j, mid + 1, right)
-            return r1 + r2
+            return self._merger(r1, r2)
         
     def query(self, i, j):
         return self._query(0, i, j, 0, self._n - 1)

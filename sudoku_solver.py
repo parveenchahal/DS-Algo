@@ -21,7 +21,6 @@ class Solution:
             next_pos = self._next_pos(pos)
             return self._solve_sudoku(next_pos, board, rows, cols, boxes)
         else:
-            found = False
             for c in range(1, 10):
                 c = str(c)
                 if self._is_valid_placement(pos, rows, cols, boxes, c):
@@ -30,15 +29,15 @@ class Solution:
                     cols[j].add(c)
                     boxes[i // 3][j // 3].add(c)
                     next_pos = self._next_pos(pos)
-                    found = found or self._solve_sudoku(next_pos, board, rows, cols, boxes)
+                    found = self._solve_sudoku(next_pos, board, rows, cols, boxes)
                     if found:
-                        return found
+                        return True
                     
                     rows[i].discard(c)
                     cols[j].discard(c)
                     boxes[i // 3][j // 3].discard(c)
                     board[i][j] = '.'
-            return found
+            return False
     
     def solveSudoku(self, board: List[List[str]]) -> None:
         """

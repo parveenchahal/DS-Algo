@@ -1,12 +1,13 @@
 # https://leetcode.com/problems/merge-k-sorted-lists/
 
+
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
 class Solution:
-    def _merge(head1, head2):
+    def _merge(self, head1, head2):
         if head1 is None:
             return head2
         if head2 is None:
@@ -40,21 +41,13 @@ class Solution:
             head2 = head2.next
         return head
 
-
+    
     def mergeKLists(self, lists: List[ListNode]) -> ListNode:
         if len(lists) == 0:
             return
         q = deque(lists)
         while len(q) > 1:
-            new_q = deque()
-            while len(q) > 1:
-                x = q.popleft()
-                y = q.popleft()
-                t = Solution._merge(x, y)
-                if t is not None:
-                    new_q.append(t)
-            if len(q) == 1:
-                new_q.append(q.popleft())
-            q = new_q
-        
-        return q.popleft() if len(q) > 0 else None
+            x = q.popleft()
+            y = q.popleft()
+            q.append(self._merge(x, y))
+        return q[0] if len(q) > 0 else None

@@ -1,6 +1,5 @@
 # https://leetcode.com/problems/majority-element/
 
-
 # Method 1 (Boyer-Moore Majority Voting Algorithm)
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:

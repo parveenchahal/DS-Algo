@@ -3,17 +3,15 @@
 # Method 1 (Bottom-Up)
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
-        n = len(coins)
-        m = amount + 1
-        MAX = amount + 1
-        dp = [MAX] * m
+        MAX = 0x7fffffffffffffff
+        dp = [MAX] * (amount + 1)
         dp[0] = 0
-        for i in range(n):
-            for j in range(coins[i], m):
-                dp[j] = min(dp[j], dp[j - coins[i]] + 1)
-        return dp[amount] if dp[amount] < MAX else -1
+        for coin in coins:
+            for i in range(coin, amount + 1):
+                dp[i] = min(dp[i], dp[i - coin] + 1)
+        return dp[amount] if dp[amount] != MAX else -1
 
-    
+
 # Method 2 (Top-Down)
 class Solution:
     

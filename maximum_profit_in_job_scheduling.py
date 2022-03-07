@@ -22,12 +22,14 @@ class Solution:
         n = len(startTime)
         jobs = [(st, ed, p) for st,ed,p in zip(startTime, endTime, profit)]
         jobs.sort()
-        memo = [x[2] for x in jobs]
+        memo = [0] * n
+        memo[n - 1] = jobs[n - 1][2]
         for i in range(n - 2, -1, -1):
-            memo[i] = max(memo[i], memo[i + 1])
             next = self._find_next(i, jobs)
             if next < n:
-                memo[i] = max(memo[i], jobs[i][2] + memo[next])
+                memo[i] = max(jobs[i][2], memo[i + 1], jobs[i][2] + memo[next])
+            else:
+                memo[i] = max(jobs[i][2], memo[i + 1])
         return memo[0]
 
 

@@ -3,7 +3,6 @@
 
 # Method 1 (Using Bottom-Up)
 class Solution:
-    
     def _find_next(self, i, jobs):
         _, cur_end, _ = jobs[i]
         left = i + 1
@@ -20,16 +19,15 @@ class Solution:
     
     def jobScheduling(self, startTime: List[int], endTime: List[int], profit: List[int]) -> int:
         n = len(startTime)
-        jobs = [(st, ed, p) for st,ed,p in zip(startTime, endTime, profit)]
+        jobs = list(zip(startTime, endTime, profit))
         jobs.sort()
         memo = [0] * n
         memo[n - 1] = jobs[n - 1][2]
         for i in range(n - 2, -1, -1):
+            memo[i] = max(jobs[i][2], memo[i + 1])
             next = self._find_next(i, jobs)
             if next < n:
-                memo[i] = max(jobs[i][2], memo[i + 1], jobs[i][2] + memo[next])
-            else:
-                memo[i] = max(jobs[i][2], memo[i + 1])
+                memo[i] = max(memo[i], jobs[i][2] + memo[next])
         return memo[0]
 
 

@@ -6,20 +6,21 @@ class Solution:
         Do not return anything, modify nums in-place instead.
         """
         n = len(nums)
-        
-        z = 0
-        while z < n and nums[z] == 0: z += 1 
-        
-        t = len(nums) - 1
-        while t >= 0 and nums[t] == 2: t -= 1
-        
-        i = z
-        while i <= t:
-            if nums[i] == 0 and z < i:
-                nums[z], nums[i] = nums[i], nums[z]
-                while z < n and nums[z] == 0: z += 1
-            elif nums[i] == 2:
-                nums[t], nums[i] = nums[i], nums[t]
-                while t >= 0 and nums[t] == 2: t -= 1
+        zero = 0
+        cur = 0
+        two = n - 1
+        while zero <= two and nums[zero] == 0:
+            zero += 1
+            cur += 1
+        while two >= zero and nums[two] == 2:
+            two -= 1
+        while cur <= two:
+            if nums[cur] == 0:
+                nums[cur], nums[zero] = nums[zero], nums[cur]
+                zero += 1
+                cur = max(cur, zero)
+            elif nums[cur] == 2:
+                nums[cur], nums[two] = nums[two], nums[cur]
+                two -= 1
             else:
-                i += 1
+                cur += 1
